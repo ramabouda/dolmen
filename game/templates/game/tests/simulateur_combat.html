@@ -1,0 +1,15 @@
+{% extends 'dolmen/base.html' %}
+
+{% block content %}
+<form action="." method="POST">
+	<h1>Attaque</h1>
+	<table>{{ attack_formset.as_table }}</table>
+	<h1>Defense</h1>
+	<table>{{ defense_formset.as_table }}</table>
+	<h1>Paramètres</h1>
+	<table>{{ param_form.as_table }}</table>
+	{% csrf_token %}
+	<input type="submit"/>
+</form>
+{{ report }}
+{% endblock %}

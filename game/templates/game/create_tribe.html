@@ -1,0 +1,10 @@
+{% extends 'dolmen/base.html' %}
+{% block content %}
+<form id="create_tribe_form" action="" method="POST">
+    <table class="form_table">
+        {{ form.as_table }}
+    </table>
+    {% csrf_token %}
+    <input type="submit">
+</form>
+{% endblock %}

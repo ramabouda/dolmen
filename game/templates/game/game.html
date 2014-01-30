@@ -1,0 +1,171 @@
+{% extends 'dolmen/base.html' %}
+{% load humanize %}
+{% load staticfiles %}
+{% load url from future %}
+
+{% block css %}
+    {{block.super}}
+    <link rel="stylesheet/less" type="text/css" href="{% static 'game/css/game.less' %}" />
+{% endblock %}
+
+{% block mainJS %}     
+{% static 'game/js/pages/main' %}
+{% endblock %}
+
+
+{% block content %}
+
+
+<div id="container">
+    
+    
+    <aside id="nav-right">
+        <div id="tribe-infos">
+            <nav id="techno-infos">
+                <div class="title research-text">Recherche</div>
+                <div class="content">
+                    <div id="current-search">
+                        {% if current_research %}
+                            <a href="{% url 'game:research_techno' %}">
+                                <img src="{{ current_research.technology.image_url }}" alt="{{ current_research.technology.identifier }}" />
+                            </a>
+                            <div class="details">
+                                {{ current_research.technology }} {{ current_research.level }}
+                            </div>
+                        {% else %}
+                            <a href="{% url 'game:research_techno' %}">Rechercher une technologie</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </nav>
+            
+            <nav class="tribe-menu">
+                <div class="title">
+                    Tribu <span id='tribe-name' contenteditable="true">{{ tribe }}</span>
+                </div>
+                <div class="content">
+                    <div id="divinity-points">
+                        {{ tribe.divinity|floatformat:0 }} points de div 
+                        ({% if tribe.divinity_income >= 0 %}+{% else %}-{% endif %}{{ tribe.divinity_income|floatformat:1 }}/h)
+                    </div>
+                    
+                    <div class="select-village">
+                        <select id='select-session-village-select' name="">
+                            {% for v in tribe.village_set.all %}
+                                <option value="{{ v.pk }}">{{ v.name }}</option>
+                            {% endfor %}
+                        </select>
+                        <input type="submit" value="Changer" id='select-session-village-btn'/>
+                    </div>
+                </div>
+            </nav>
+        </div>
+        
+        <div id="village-infos">
+            <div class="tablet-nav">
+                <button type="button" class="btn-toggle-menu" data-toggle="collapse" data-target="#nav-village">
+                  Menu du Village
+                </button>
+            </div>
+            <div class="village-name">
+                {% with number=village.get_total_unit_number %}
+                <span id='village-name' contenteditable="true">{{ village.name }}</span> ({{ number }} inhabitant{{ number|pluralize }})
+                {% endwith %}
+            </div>
+        </div>
+        
+        <div id="nav-village" class="collapse">            
+            <nav id="resources">
+                <div class="title">Ressources</div>
+                <div class="content">
+                    {{ village.resources_html }}
+                </div>
+            </nav>
+            
+            <div id="quick-access">
+                <nav class="info-button" id="building-button">
+                    <div class="title">Bâtiment</div>
+                    <div class="content">
+                        <a href="{% url 'game:build' %}">Construire un bâtiment</a>
+                    </div>
+                </nav>
+                
+                <nav class="info-button" id="unit-button">
+                    <div class="title">Unités</div>
+                    <div class="content">
+                        {% if current_enrollement %}
+                            <a href="{% url 'game:enroll_units' %}">
+                                <img src="{{ current_enrollement.unit.small_image_url }}" alt="{{ current_enrollement.unit.identifier }}" />
+                            </a>
+                            <div class="details">
+                                {{ current_enrollement.unit }}
+                            </div>
+                        {% else %}
+                            <a href="{% url 'game:enroll_units' %}">
+                            Recruter des unités
+                            </a>
+                        {% endif %}
+                    </div>
+                </nav>  
+            </div>            
+            
+            <nav id="groups-overview">
+                <div class="title">Groupes du village {{ village.name }}</div>
+                <div class="content">
+                    <ul class='group-list'>
+                        {% for group in village_groups %}
+                            {{ group.as_li }}
+                        {% endfor %}
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </aside>
+    
+    <nav id="nav-top">
+        <div class="border-line">
+            <div class="mobile-nav">
+                <button type="button" class="btn-toggle-menu" data-toggle="collapse" data-target=".nav">
+                  Menu
+                </button>
+            </div>
+            <div class="nav collapse">
+                <ul>
+                    <li><a href='{% url 'game:main_view' %}'>Accueil</a></li>
+                    <li><a href='{% url 'game:main_view' %}'>Tribu</a></li>
+                    <li><a href='{% url 'game:mail_box' %}'>Messages</a></li>
+                    <li><a href="{% url 'game:main_view' %}#/reports">Rapports{% if tribe.unread_reports_number %} <span class=''>({{ tribe.unread_reports_number }})</span>{% endif %}</a></li>
+                    <li>Amis</li>
+                    <li>Alliance</li>
+                    <li>Résumé</li>
+                    <li><a href='{% url 'game:view_map' 1 %}'>Voir la carte</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    
+    
+    
+    
+    <div id="game-content">
+
+        <div data-ng-view></div>
+        
+        {% block info %}
+        {% if messages %}
+        <ul id=messages>
+            {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        {% endblock info %}
+    
+        {% block game_content %}
+
+        {% endblock %}
+    </div>
+    
+    
+</div>
+{% endblock %}

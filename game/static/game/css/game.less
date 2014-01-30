@@ -1,0 +1,713 @@
+@import "../../dolmen/css/mixins.less";
+@import "../../dolmen/css/settings.less";
+
+
+*{line-height: normal;}
+a{
+    color:white;
+    &:hover{color:white;}
+}
+
+select{
+    height: inherit;
+    line-height: inherit;
+    padding: 2px;
+    margin: 0;
+}
+
+
+/**
+
+#content{font-family: calibri, arial, sans-serif; }
+/*#content div {border:1px solid black;}*/
+
+/*********************************
+ * General
+ *********************************
+ */
+
+.clear{clear:both;}
+
+#container{
+    margin:auto;
+    max-width: 1200px;
+    border-top-width: 0;
+    position: relative;
+    overflow: hidden;
+    
+    .btn-toggle-menu{
+        margin-right: 10px;
+    }
+}
+
+/*********************************
+ * Top Menu
+ *********************************
+ */
+#nav-top{
+    background: @main_menu_background_color;
+    box-shadow: 0 0 4px rgba(255, 255, 255, 0.6);
+    border: 1px solid @main_menu_border_color;
+    border-width: 0 1px 1px 1px;
+    padding: 3px;
+    overflow: auto;
+    .border-line{
+        border-style: solid;
+        overflow: hidden;
+        border-width: 1px 27px 1px 27px;
+        border-image: url(../images/design/menu_border_small.png) 27 fill repeat;
+        padding: 3px 0 3px 0;
+    }    
+    a{
+        color: @main_menu_link_color;
+        text-decoration: none;
+        &:hover{
+            text-shadow: 0 -1px rgba(255, 255, 255, 0.15);
+            text-decoration: none;
+            color: @main_menu_link_hover_color;
+        }
+    }
+    ul{
+        list-style:none; margin:0; padding:0;
+        li{
+            display:block; float:left; margin:0 0 0 5px;
+        }
+    }
+    .nav{margin: 0;}
+}
+
+/*********************************
+ * Right Menu
+ *********************************
+ */
+.bg-img{position:absolute; width:100%; height:100%; top:0; left:0; z-index:0;}
+#nav-right{
+    float:right;
+    margin-right: 5px;
+    box-shadow: 1px 1px 4px rgba(255, 255, 255, 0.6);
+    color: @game_menu_font_color;
+    width: 300px;
+    background: url('../images/design/red_bg.png') @game_menu_background_color;
+    overflow: hidden;
+    nav{
+        @nav_title_height: 15px;
+        background: @game_menu_block_background_color;
+        border: 1px solid @game_menu_border_color;
+        position: relative;
+        font-size: 0.8em;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.6);
+        overflow: hidden;
+        .title{
+            width: 100%;
+            color: @game_menu_font_color_title;
+            background: @game_menu_background_color_title;
+            padding: 0 0 0 2px;
+            height: @nav_title_height;
+        }
+        .content{
+            padding: 3px;
+        }
+    }
+    a{
+        text-decoration: none;
+        &:hover{
+            text-decoration: underline;
+        }
+    }
+    
+    #tribe-infos{
+        @tribe_info_height: 105px;
+        padding: 5px 5px 5px;
+        nav{
+            border-top: 0;
+        }
+        #techno-infos{
+            height: @tribe_info_height;
+            float:right;
+            width:90px;
+            span.research-text{
+                
+            }
+            #current-search{
+                height:75px;
+                width:75px;
+                position: relative;
+                border: 1px solid @icon_border_color;
+                margin: 5px auto 0 auto;
+                .details{
+                    text-align: center;
+                    position: absolute;
+                    bottom: 0; left: 0;
+                    background-color: rgba(0, 0, 0, 0.5);
+                    width: 74px;
+                    color:white;
+                    padding: 0 1px 0 1px;
+                }
+            }
+        }
+        .tribe-menu{
+            margin-right: 105px;
+            height: @tribe_info_height;
+            .title{
+                font-size: 14px;
+                height: 21px;
+                padding-top: 2px;
+            }
+            #divinity-points{
+                margin-bottom: 5px;
+            }
+            #tribe-name a{
+                color: @game_menu_font_color_title;
+            }        
+            .select-village{
+                select{width:120px;}        
+            }
+        }
+    }    
+    
+    #village-infos{
+        height:25px;
+        background: @game_menu_background_color_title;
+        color: @game_menu_font_color_title;
+        border-top: 2px solid @game_menu_block_background_color;
+        .village-name{
+            padding:5px 1px 1px 4px;
+        }
+    }
+    
+    #nav-village{
+        padding: 0 5px 5px 5px;
+        &.in{
+            overflow: visible;
+        }
+        nav{
+            margin:10px 0 0 0;
+        }
+        #resources{
+            overflow: hidden;
+            padding-bottom: 0;
+        }
+        #current-resources{
+            .resource{
+                float: left;
+                height: 40px;
+                width: 85px;
+                padding-top: 2px;
+                white-space: nowrap;
+            }
+            .basic-resources{width: 170px; float: left;}
+            .resource{
+                img{
+                    height:30px;
+                    width: 30px;
+                    float: left;
+                    margin: 0px 2px 2px 2px;
+                    border: 1px solid @icon_border_color;
+                }
+                .income{}
+                .value{ font-weight: bold; font-size: 1.2em;}
+            }
+        }        
+        #quick-access{
+            .info-button{
+                height:90px;
+                position:relative;
+                a{font-size: 1.1em;}
+                section{z-index: 10; position:relative;}
+            }
+            #unit-button{margin-right: 94px;}
+            #building-button{width: 80px;float:right;margin: 0;}
+        }
+        
+    }
+    #groups-overview{
+        h5{
+            margin: 0;
+            clear:both;
+        }
+    }
+    
+    
+    *[contenteditable=true]{
+        display: inline-block;
+        padding-right: 17px;
+        background: url('../../dolmen/img/icon_editable.png') center right no-repeat;
+        &:hover, &:focus{
+            background-color: @game_menu_content_editable_background;
+        }
+        &:focus{
+            border: 1px solid @game_menu_content_editable_border_color;
+            cursor: text !important;
+            padding-left: 2px;
+            box-shadow: 0 0 3px rgba(255, 255, 255, 1);
+        }
+        &:hover{
+            cursor: pointer;
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+/*********************************
+ * Game Content
+ *********************************
+ */
+#game-content{
+    background: @game_background_color;
+    color: @default_font_color;
+    box-shadow: 0 0 4px rgba(255, 255, 255, 0.6);
+    padding: 3px 3px 3px 3px;
+    min-height: 500px;
+    min-width: 300px;
+    margin-right: 305px;
+    border: 1px solid @default_border_color;
+    border-width: 0 1px 1px 1px;
+    text-align: left;
+    h2{
+        color: @default_title_color;
+        margin: 0 0 15px 0;
+        padding: 0 0 0 10px;
+    }
+}
+
+.group-list{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+.group_container{
+    display: block;
+    overflow: hidden;
+    margin-top: 3px;
+    padding: 2px 1px;
+    cursor: pointer;
+    &#selected_group{
+        background-color: #FFAC1A;
+    }
+    .group-units{
+    }
+    .group-stacks{
+        float: none;
+    }
+    .unitstack{
+        float: left;
+        width: 54px;
+        text-align: center;
+        font-size: 0.8em;
+        img{
+            border: 1px solid @icon_border_color;
+            .box-shadow(0 0 3px rgba(0, 0, 0, 0.3));
+        }
+    }
+}
+
+.split_group{
+    .unitstack{
+        clear:both;
+        overflow: auto;
+        width: 200px;
+        img{
+            float: left;
+            margin-right: 5px;
+        }
+        .number{
+            text-align: right;
+            margin-top: 4px;
+            padding-right: 10px;
+        }
+        input[type=range]{
+            width:140px;
+        }
+    }
+}
+
+
+
+.box{
+    background: @default_box_background_color;
+    margin: 0 10px 20px 10px;
+    border: 1px solid @default_box_background_color;
+    header{
+        background: @default_box_background_color_title;
+        padding: 5px;
+        overflow: hidden;
+        color: @default_box_title_color;
+        h3{
+            line-height: normal;
+            font-size: 18px;
+            margin: 0;
+        }
+    }
+    .content{
+        padding: 5px;
+        overflow: auto;
+    }
+}
+
+.itembox{
+    border-radius: 2px 2px 12px  ~"2px / 2px" 2px 12px 2px;
+    font-size: 11pt;
+    .content{padding: 0;}
+    .icon{
+        float: left;
+        border-radius: 2px 0 0 2px;
+        border: 1px solid @default_box_background_color_title;
+        border-left-width: 0;
+        margin: 8px 0 8px 0;
+    }
+    .info{ padding: 8px 8px 8px 12px; margin-left: 75px;  overflow: auto; }
+    .level{font-weight: bold;}
+    .upgrade-form{float:right;}
+    
+    .row{margin: 0}
+    .inside-box{
+        background-color: @default_box_background_color_light;
+        padding: 8px;
+        margin-bottom: 8px;
+        &:last-child{margin-bottom: 0;}
+        h5{
+            margin: 0 0 5px 0;
+            border-bottom: 1px solid;
+            font-size: 1em;
+        }
+    }
+}
+
+
+
+/*********************************
+ * popover
+ *********************************
+ */
+
+
+.popover{
+    color: black;
+}
+
+
+/*********************************
+ * Map
+ *********************************
+ */
+
+#map{
+    position: relative;
+    width: 100%;
+    height: 700px;
+    margin-bottom: 500px;
+    .tile{
+        width: 72px;
+        height: 62px;
+        overflow: visible;
+        position: absolute;
+        bottom: 0px;
+        &:hover{-webkit-filter: ~"saturate(3)";}
+        &.ground_0{background: url("../images/grounds/0.png") center no-repeat;}
+        &.ground_1{background: url("../images/grounds/1.png") center  no-repeat; height: 72px;}
+        &.ground_2{background: url("../images/grounds/2.png") center  no-repeat; height: 72px;}
+        &.ground_3{background: url("../images/grounds/3.png") center no-repeat;}
+        .detail{
+            position: absolute;
+            bottom: 0px;
+            &.group{left: 18px;}
+            &.village{}
+        }
+        menu{ display: none;}
+    }
+    .unseen_case{-webkit-filter: brightness(0.3);}
+    .seen_case.in_path, .unseen_case.in_path{-webkit-filter: brightness(1) ~"saturate(1.7)" }
+    .popover{
+        #split-group-form{
+            margin: 10px 0 5px 0;
+        }
+    }
+}
+
+ul.action-list{
+    list-style: none;
+    margin: 0;
+    a{
+        color: inherit;
+    }
+}
+
+.big-tile{
+    height: 640px;
+    width: 700px;
+    position: relative;
+    .close-button{
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        display: block;
+        background: @game_menu_background_color;
+        padding: 5px 10px 5px 10px;
+        &:hover{
+            text-decoration: none;
+        }
+    }
+    .village_display{
+        position:absolute;
+        cursor: pointer;
+        &.village_1{left: 155px; top: 10px;}
+        &.village_2{left: 411px; top: 491px;}
+        &.village_3{left: 402px; top: 10px;}
+        &.village_4{left: 165px; top: 491px;}
+        &.village_5{left: 546px; top: 254px;}
+        &.village_6{left: 23px; top: 237px;}
+    }
+    .tile_groups{
+        position: relative;
+        top: 200px;
+        left: 200px;
+    }
+}
+
+
+
+/*****************************
+ * Techno
+ * ***************************
+ */
+.itembox.techno{
+    .cost{margin: 4px 0 0 0;}
+    .icon{}
+    .info{}
+
+    .requirements{
+        font-size: 0.9em;
+        .required{color: #c10900;}
+        .available{color: #0c7e0f; }
+    }
+
+}
+
+
+
+/*****************************
+ * Buildings
+ * ***************************
+ */
+.building{}
+
+/*****************************
+ * Units
+ * ***************************
+ */
+
+.resource_img{width: 20px; height: 20px; border: 1px solid black;}
+
+.enroll-units .itembox{
+    .info{
+        .caracs ul{list-style-type: none; padding: 0; margin: 0;}
+        input[type=text]{
+            width: 100px;
+        }
+    }
+}
+
+.cost{
+    overflow: hidden;
+    .resource{
+        font-size: 0.8em;
+        float: left;
+        text-align: center;
+        margin-right: 5px;
+        img{
+            height: 30px;
+            width: 30px;
+            border: 1px solid @icon_border_color;
+            display: block;
+            margin: auto;
+        }
+    }
+}
+.group-resources{
+    width:56px; float: right;
+    .resource{
+        font-size: 0.6em;width: 28px; float: left; text-align: center;
+    }
+}
+.choose-group{
+    .current_mission{
+        font-size: 1.2em;
+    }
+}
+
+
+/*****************************
+ * Messages
+ * ***************************
+ */
+
+
+
+.message{
+    header{
+        ul{
+            font-size: 0.9em;
+            float: right;
+            text-align: right;
+            margin: 0;
+            li{
+                line-height: normal;
+            }
+        }
+    }
+}
+
+
+.fight_report{
+    
+}
+/* describe the state of the groups during a fight */
+table.groups_fight_state{
+    width: 100%;
+    tr:nth-child(even){background: @default_box_background_color_light;}
+    tr:nth-child(odd){
+        h4{text-align: center;}
+        &:extend(.opposite_colors);
+    }
+    td:first-child+td .group_container{
+        float: right;
+    }
+}
+
+/* add to the the bootstrap's tabs */
+.ingame_tabs{
+    li>a{
+        &:hover{
+            &:extend(.opposite_colors);
+            border-color: @default_box_background_color_light;
+        }
+        background: @default_box_background_color_light;
+        color: @default_font_color;
+        border-color: @default_box_background_color_light;
+    }
+    li.active>a, li.active>a:hover{
+        &:extend(.opposite_colors);
+        background: @default_box_background_color_even_lighter;
+    }
+    border-color: @default_box_background_color_light;
+}
+
+
+
+/**
+ * Responsive
+ */
+
+.mobile-nav{
+    display: none;
+}
+
+@media (min-width: 1100px) {
+    #nav-top{
+        float:left;
+        width: 150px;
+        margin-left: 5px; 
+        ul li{
+            float: none;
+            margin: 2px 0 2px 0;
+        }
+        padding: 8px 0 8px 0; 
+        .border-line{
+            padding: 8px 0 8px 0;   
+        }  
+    }
+    #game-content{
+        margin-left: 170px;
+    }
+}
+
+@media (max-width: 1100px) {
+    #nav-top{
+        padding: 4px 3px 3px 3px;
+        border: 0;
+        margin-left: 0;
+        box-shadow: none;
+        ul{
+            margin: 0;
+            list-style-type: none;
+            li{
+                float:left;
+                margin: 0 7px 0 0;
+            }
+        }
+    }
+    #game-content{
+        box-shadow: none;
+        margin-right: 300px;
+    }
+    #nav-right{
+        margin-right: 0;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 979px) {
+}
+
+@media (max-width: 767px){
+    body {
+        padding:0;
+    }
+}
+
+
+@media (max-width: 979px) {
+    #nav-right{
+        float:none;
+        width: 100%;
+        #village-infos{height: 30px;}
+    }
+    .tablet-nav{
+        display: block;
+        float: right;
+    }
+    #game-content{
+        margin-right: 0px;
+    }
+    #nav-top{
+        box-shadow: none;
+        margin-right: 0;
+        border: 0;
+    }
+}
+
+@media (min-width: 979px){    
+    .tablet-nav{
+        display: none;
+    }
+    #nav-village{
+        height: inherit !important;
+    }
+}
+
+@media (max-width: 500px){
+    #nav-top{
+        .nav{
+            height: 0;
+            overflow: hidden;
+        }
+    }
+    .mobile-nav{
+        display: block;
+        float: right;
+    }    
+    #nav-top ul li{
+        float:none;
+    }
+}
+
+@media (min-width: 500px){
+    .nav.collapse{height: inherit !important;}
+}
+

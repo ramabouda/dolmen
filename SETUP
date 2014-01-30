@@ -1,0 +1,20 @@
+
+SETUP THE PROJECT
+
+
+Install Python Modules
+======================
+
+Get pip, then at the project root, do :
+
+> pip install -r requirements.txt
+
+
+
+Install Javascript Modules
+==========================
+
+Get NodesJS, then at the project root, do :
+
+> npm install bower
+> bower install

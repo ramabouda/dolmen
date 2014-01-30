@@ -1,0 +1,22 @@
+{
+  "name": "dolmen",
+  "version": "0.1",
+  "ignore": [
+    "**/.*",
+    "doc"
+  ],
+  "devDependencies": {
+    "angular": "~1.2.0",
+    "angular-scenario": "~1.2.0",
+    "angular-route": "~1.2.0",
+    "angular-mocks": "~1.2.0",
+    "angular-sanitize": "~1.2.0",
+    "angularAMD": "",
+    "requirejs": "~2.1.9",
+    "requirejs-text": "~2.0.10",
+    "jquery": "~1.10.2",
+    "less": "~1.4.1",
+    "bootstrap" : "~2.3.2"
+  }
+}
+  

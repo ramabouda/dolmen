@@ -1,0 +1,12 @@
+{% load staticfiles %}
+{% if resources %}
+    <div class='group-resources'>
+    {% for k,v in resources.to_dict.items %}
+        <div class="resource">
+            <img src="{% static 'game/images/resources/small/' %}{{ k }}.png" alt="{{ k }}" />
+            {{ v|floatformat:0 }}
+        </div>
+    {% endfor %}
+    </div>
+{% endif %}
+    

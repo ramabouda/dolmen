@@ -1,0 +1,97 @@
+@import "mixins.less";
+@import "settings.less";
+/* *{padding:0;margin:0;} */
+
+html{
+    background: @body_background_color;
+    min-height: 100%;
+}
+
+
+body{
+    margin: 0;
+}
+
+*:focus{
+    outline: none;
+}
+
+.wrapper{
+	background-color: black;
+	background-image:url('../../dolmen/img/background_image.jpg');
+	background-repeat:no-repeat;
+	background-attachment:absolute;
+	background-position:center top; 
+	background-color:black;
+	color:white;
+	padding:0;margin:0;
+	font-family: Calibri, Helvetica, Verdana, Arial, sans-serif;
+    overflow: hidden;
+    min-height: 100%;
+}
+
+
+.block-logo{
+	margin-left:auto;
+	margin-right:auto;
+	display:block;
+	max-width:280px;
+}
+figcaption{
+	max-width:120px;
+}
+
+//.popup_menu_shown {display: block; z-index: 2000}
+
+/*
+#tip{position:absolute;visibility:hidden;text-align:left;color:#000;z-index:1000;}
+
+#tip .classic{
+    border: 1px solid grey;
+    background: lightgrey;
+    padding: 1px 5px 1px 5px;
+    border-radius: 2px 2px 6px 2px;
+    box-shadow:  2px 2px 3px black;
+}
+*/
+
+
+
+.cur_pointer{
+    cursor: pointer;
+}
+
+.button{
+    .gradient(#E8D482, #4A4016, #998228);
+    .rounded(6px);
+    .box-shadow(0 0 4px rgba(0, 0, 0, 0.3));
+    border: 1px solid #111;
+    color: #fff;
+    text-shadow: 0 -1px 4px rgba(0, 0, 0, 1);
+    padding: 3px 4px;
+    &:hover{
+        .gradient(#C2481F, #853115, #C2481F);
+    }
+
+    &:active{
+        background: #C2481F;
+    }
+
+}
+
+
+input[type="submit"], button{
+    .button;
+}
+
+
+.nav-tabs > li{
+    cursor: pointer;
+}
+
+
+.popover-content{display: none;}
+.popover{
+    .popover-content{display: block;}
+}
+

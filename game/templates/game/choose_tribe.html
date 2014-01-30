@@ -1,0 +1,7 @@
+{% extends 'dolmen/base.html' %}
+
+{% block content %}
+{% for tribe in tribes %}
+<a href="{% url 'game:choose_tribe_by_id' tribe.id %}">{{ tribe }}</a>
+{% endfor %}
+{% endblock %}

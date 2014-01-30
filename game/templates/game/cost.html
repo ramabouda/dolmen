@@ -1,0 +1,9 @@
+{% load staticfiles %}
+
+<div class="cost">
+{% for r_name, r_value in cost %}
+    <div class="resource"><img src="{% static 'game/images/resources/small/' %}{{r_name}}.png" alt="{{r_name}}" /> {{r_value|floatformat:0}}</div>
+    {% empty %}
+    Gratuit
+{% endfor %}
+</div>

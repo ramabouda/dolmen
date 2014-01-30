@@ -1,0 +1,139 @@
+{% load object_id from utils %}
+<div class="fight_report">
+    <h3> Rapport de combat du {% now "jS F Y H:i"%} </h3>
+    
+    <h4>Début du combat</h4>
+    <table>
+      <thead>
+        <tr>
+          <td>Attaquants</td>
+          <td>Défenseurs</td>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td>
+          <ul>
+            {% for type, number in combat.units_attacker_count.items %}
+            <li>{{ number }} {{ type }}{{ number|pluralize }}</li>
+            {% endfor %}
+          </ul>
+        </td>
+        <td>
+          <ul>
+            {% for type, number in combat.units_defender_count.items %}
+            <li>{{ number }} {{ type }}{{ number|pluralize }}</li>
+            {% endfor %}
+          </ul>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+    <h4>Fin du combat</h4>
+    <table>
+      <thead>
+        <tr>
+          <td>Attaquants</td>
+          <td>Défenseurs</td>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td>
+          <ul>
+            {% for type, number in combat.attack_remain.items %}
+            <li>{{ number }} {{ type }}{{ number|pluralize }}</li>
+            {% endfor %}
+          </ul>
+        </td>
+        <td>
+          <ul>
+            {% for type, number in combat.defense_remain.items %}
+            <li>{{ number }} {{ type }}{{ number|pluralize }}</li>
+            {% endfor %}
+          </ul>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+    <h4>Dont unités en fuite</h4>
+    <table>
+      <thead>
+        <tr>
+          <td>Attaquants</td>
+          <td>Défenseurs</td>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td>
+          <ul>
+            {% for type, number in combat.attack_fleeing.items %}
+            <li>{{ number }} {{ type }}{{ number|pluralize }}</li>
+            {% endfor %}
+          </ul>
+        </td>
+        <td>
+          <ul>
+            {% for type, number in combat.defense_fleeing.items %}
+            <li>{{ number }} {{ type }}{{ number|pluralize }}</li>
+            {% endfor %}
+          </ul>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+    
+    
+    <h3>Détails du combat</h3>
+    <ul class="nav nav-tabs ingame_tabs" data-tabs="tabs">
+        {% for round in combat.record_rounds %}
+            <li{% if forloop.counter == 1 %} class="active"{% endif %}>
+                <a data-target="#fight{{combat|object_id}} .round{{forloop.counter}}" data-toggle="tab">Round {{forloop.counter}}</a>
+            </li>
+        {% endfor %}
+    </ul>
+    
+    <div class="tab-content" id="fight{{combat|object_id}}">
+        
+        {% for round in combat.record_rounds %}
+        <div class="tab-pane round{{forloop.counter}} {% if forloop.counter == 1 %}active{% endif %}">
+            <table class="groups_fight_state">
+                {% for couple in round %}
+                <tr>
+                    <td colspan="2">
+                        <h4>
+                            {% if forloop.counter == 1 %}
+                                Unités restantes
+                            {% elif forloop.counter == 2 %}
+                                Unités en fuite
+                            {% else %}
+                                Unités mortes
+                            {% endif %}
+                        </h4>
+                    </td>
+                </tr>
+                <tr>
+                    {% for group_dict in couple %}
+                    <td>
+                        <div class="group_container">
+                            {% for unittype, number in group_dict.items %}
+                            <div class='unitstack' data-unit_type_id="{{ unit_type_id }}">
+                                <img src="{{ unittype.small_image_url }}">
+                                <div class="number">{{ number }}</div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </td>
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+            </table>
+        </div>    
+        {% endfor %}
+    
+    </div>
+</div>
+
+
+

@@ -1,0 +1,29 @@
+<h2>Rapports</h2>
+
+<ul class="unstyled">
+	<li  class="">
+		<a href="#/phones/{{phone.id}}">{{phone.name}}</a>
+		<p>{{phone.body}}</p>
+	</li>
+</ul>
+
+<article id='report-{{ report.id }}' class="message box" ng-repeat="report in reports | filter:query">
+    <header>
+        <nav>
+            <ul class="unstyled">
+                <li class='delete-report' data-report-id='{{ report.id }}'><a href="#">Supprimer</a></li>
+
+                <li class='mark-read-report' data-report-id='{{ report.id }}'><a href="#">Marquer comme lu</a></li>
+
+                <li class='mark-unread-report' data-report-id='{{ report.id }}'><a href="#">Marquer comme non lu</a></li>
+
+            </ul>
+        </nav>
+        <h3>
+            {{ report.subject }}
+        </h3>
+        <span>{{ report.date|date:'dd-MM HH:mm:ss' }}</span>
+    </header>
+    <div class="content"  ng-bind-html="report.body">
+    </div>
+</article>

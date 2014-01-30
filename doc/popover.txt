@@ -1,0 +1,15 @@
+
+--- CSS class ---
+
+default_popover : Popover is setup by default on all html objects with the class 
+"default_popover". If an object with this class is added to the page after this
+call, you need to make the popover call again.
+
+has_popover : All popovers with this class will be hidden if the users click outside
+the popover.
+
+--- Propotyping ---
+
+You can add a HTML object with the class popover-content directly after the object
+triggering the popover in order to have it as the content.
+

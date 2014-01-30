@@ -1,0 +1,43 @@
+{% extends 'game/game.html' %}
+{% load staticfiles %}
+{% load position_tile from display_maps %}
+
+{% block mainJS %}     
+{% static 'game/js/pages/map' %}
+{% endblock %}
+
+{% block game_content %}
+<div id="map">
+    {% for tile in tiles.all %}
+    <div class="tile ground_{{ tile.ground }} has_popover {% if tile in tiles.unseen %}un{% endif %}seen_case"
+		style="{{ tile|position_tile:center }}" 
+		id="tile_{{ tile.id }}"
+		data-ground='{{ tile.ground }}'
+		data-id='{{ tile.id }}'
+		data-x='{{ tile.x }}'
+		data-y='{{ tile.y }}'
+	/>
+        {% if tile in tiles.villages %}
+            <img
+                class="detail village"
+                src='{% static 'game/images/village_small.png' %}'/>
+        {% elif tile in tiles.groups %}
+            <img
+                class="detail group"
+                src='{% static 'game/images/group_small.png' %}'/>
+        {% endif %}
+	<menu>
+	    <ul>
+		    <li>move</li>
+		    <li>gather</li>
+		    {% if tile in tiles.seen %}
+			    <li>inspect</li>
+		    {% endif %}
+	    </ul>
+	</menu>
+    </div>
+    {% endfor %}
+</div>
+<div id='tile-details'></div>
+    
+{% endblock %}

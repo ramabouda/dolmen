@@ -1,0 +1,84 @@
+{% extends 'dolmen/base.html' %}
+{% load staticfiles %}
+{% load webdesign%}
+
+
+{% block css %}
+    {{block.super}}
+    <link rel="stylesheet/less" type="text/css" href="{% static 'dolmen/css/home.less' %}" />
+{% endblock %}
+
+{% block mainJS %}     
+{% static 'dolmen/js/app/landing' %}
+{% endblock %}
+
+{% block content %}
+
+
+
+<div class="background_image home">
+	<div class="container border">
+		<div class="row border">
+			<div class="span8 offset2 border">
+				<nav>
+					<ul>
+						<li>
+						<a href="/game">Jouer</a>
+						</li>
+						<li>
+						<a href="/admin">Admin</a>
+						</li>
+                        <li>
+                        <a href="{% url 'socialauth_begin' 'google' %}">Se connecter avec Google</a>
+                        </li>
+					</ul>
+				</nav>
+				<nav>
+					<ul class="nav nav-tabs">
+						<li><a href="#presentation" data-toggle="tab">Présentation</a></li>
+						<li><a href="#screenshots" data-toggle="tab">Screenshots</a></li>
+						<li><a href="#features" data-toggle="tab">Features</a></li>
+					</ul>
+				
+					<!-- tab "panes" -->
+					<div class="tab-content">
+						<div class="tab-pane active" id="presentation">
+							{% lorem 3p %}
+						</div>
+						
+						
+						<div class="tab-pane" id="screenshots">
+							<ul class="tabs">
+								<li><a href="#">Carte</a></li>
+								<li><a href="#">Tech</a></li>
+								<li><a href="#">Batiments</a></li>
+							</ul>
+							
+							<div class="panes">
+								<div>
+									<img class="screenshot" src="{% static 'dolmen/img/screen2.jpg'%}">
+								</div>
+								<div>
+									<img class="screenshot" src="{% static 'dolmen/img/screen1.jpg'%}">
+								</div>
+								<div>
+									<img class="screenshot" src="{% static 'dolmen/img/screen3.jpg'%}">
+								</div>
+							</div>						
+						</div>
+						
+						<div class="tab-pane" id="features">
+							Features
+						</div>
+					</div>
+				</nav>
+			</div>
+		</div>
+	</div>
+
+	<footer>
+
+	</footer>
+</div>
+
+{% endblock %}

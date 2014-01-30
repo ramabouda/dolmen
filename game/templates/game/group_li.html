@@ -1,0 +1,26 @@
+<li
+    id='group_{{ group.id }}'
+    data-id='{{ group.id }}'
+    data-x='{{ group.position.x }}'
+    data-y='{{ group.position.y }}'
+    class='group_container'
+>
+    <div class='choose-group' >
+        {% if group.mission %}
+        <span class="current-mission">Mission: {{ group.mission }}</span>
+        {% elif group.inhabitants_of %}
+        <span class="current-mission">Inhabitants of {{ group.inhabitants_of.name }}</span>
+        {% endif %}
+        <div data-group_id="{{ group.id }}" class="group-units">
+            {% for stack in group.unitstack_set.all %}
+                <div class='unitstack' data-unit_type_id="{{ stack.unit_type_id }}">
+                    <img src="{{ stack.unit_type.small_image_url }}">
+                    <div class="number">{{ stack.number }}</div>
+                </div>
+            {% endfor %}
+        </div>
+        {% with group.resources as resources %}
+        {% include 'game/resources.html' %}
+        {% endwith %}
+    </div>
+</li>

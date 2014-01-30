@@ -1,0 +1,64 @@
+{% extends 'game/game.html' %}
+
+
+{% block game_content %}
+
+<h2>Recruter des unités</h2>
+
+<div class="enroll-units">
+    <form action="." method="post">
+        
+        {% for unit_type in available_units %}
+            
+            <div class="unit box itembox">
+                <header>
+                    <h3>{{unit_type.name}}</h3>
+                </header>
+                <div class="content">
+                    <img class="icon" src="{{ unit_type.image_url }}" alt="{{unit_type.name}}" />
+                    <div class="info">
+                        <div class="row-fluid">
+                            <div class="span5 inside-box">
+                                <h5>Description</h5>
+                                {{ unit_type.description }}
+                            </div>
+                            <div class="span7">
+                                <div class="caracs inside-box">
+                                    <h5>Caractéristiques</h5>
+                                    <ul>
+                                        <li>Attaque : {{ unit_type.attack }}</li>
+                                        <li>Defense : {{ unit_type.defense }}</li>
+                                        <li>Vitesse : {{ unit_type.speed }}</li>
+                                    </ul>                        
+                                </div>
+                                
+                                <div class="cost inside-box">
+                                    <h5>Coût</h5>
+                                    {{ unit_type.cost.html|safe }}
+                                </div>
+                                
+                                <div class="recruit-form inside-box">  
+                                    <h5>Recruter</h5>                      
+                                    <input type="hidden" name="form-{{ forloop.counter0 }}-unit_type" value="{{ unit_type.id }}" />
+                                    <input type="text" name="form-{{ forloop.counter0 }}-number" id="id_form-{{ forloop.counter0 }}-number" size="4" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        {% endfor %}
+    
+        <div class="clear"></div>
+        {% csrf_token %}
+        <input type="hidden" name="form-TOTAL_FORMS" value="{{ available_units.count }}" />
+        <input type="hidden" name="form-INITIAL_FORMS" value="0" />
+        <input type="submit"/>
+        
+        
+    </form>
+</div>
+
+
+{% endblock %}

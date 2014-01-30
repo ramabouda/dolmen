@@ -1,0 +1,43 @@
+{% extends 'game/game.html' %}
+
+{% block game_content %}
+    
+
+<h2>Construire un bâtiment</h2>
+
+{% for b in buildings %}
+    
+<article class="building box itembox">
+    <header>
+        <h3>{{b.building.name}}</h3>
+    </header>
+    <div class="content">
+        <img class="icon" src="{{b.building.image_url}}" alt="{{b.building.name}}" />
+        <div class="info">
+
+            <div class="level">Niveau {% if b.building_constructed %}{{b.building_constructed.level}}{% else %}0{% endif %}</div>
+                    
+            <div class="upgrade-form">
+            {% if b.can_pay %}
+                <form method="post" action="">
+                    {{b.form}}
+                    {% csrf_token %}
+                    <input type="submit">
+                </form>
+            {% else %}
+                Pas assez de ressources
+            {% endif %}
+            </div>
+            
+            <div class="cost">
+                {{ b.cost_next_upgrade.html|safe}}
+            </div>
+            
+        </div>
+    </div>
+</article>
+
+    
+{% endfor %}
+
+{% endblock %}

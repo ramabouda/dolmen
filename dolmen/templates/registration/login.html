@@ -1,0 +1,13 @@
+{% extends 'dolmen/base.html' %}
+
+{% block content %}
+
+<form method=post>
+    <table class=table_form>
+        {{ form.as_table }}
+    </table>
+    {% csrf_token %}
+    <input type=submit></ input>
+</form>
+
+{% endblock %}

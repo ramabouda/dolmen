@@ -1,0 +1,19 @@
+{% load staticfiles %}
+<div id="current-resources">
+    {% for name, value in resources %}
+    {% if name == 'food' %}
+        <div class="basic-resources">
+    {% endif %}
+    <div class="resource">
+        <img src="{% static 'game/images/resources/normal/' %}{{ name }}.png" data-tip="{{ name }}" alt="{{ name }}" />
+        <span class="value">{{ value.0|floatformat:0 }}</span>
+        <br />
+        <span class='income'>
+            {% if value.1 >= 0 %}+{% endif %}{{ value.1|floatformat:1 }}/h
+        </span>
+    </div>
+    {% if name == 'skin' %}
+        </div>
+    {% endif %}
+    {% endfor %}
+</div>

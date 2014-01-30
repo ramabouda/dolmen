@@ -1,0 +1,70 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="fr">
+
+	<head>
+		{% block head %}
+
+		<meta charset="utf-8">
+        <link rel="shortcut icon" type="img/png" href="{{ STATIC_URL }}img/favicon.png">
+		<title>{% block title %}{{ titre_prefixe }}Dolmen, version de développment{% endblock %}</title>
+	
+		{% block script %}     
+		<script type="text/javascript" data-main="{% block mainJS %}{% static 'dolmen/js/main' %}{% endblock %}" src="{% static 'dolmen/js/lib/requirejs/require.js'%}"></script>
+		{% endblock %}
+	
+		{% block css %}
+		<link rel="stylesheet" type="text/css" href="{% static 'dolmen/css/bootstrap/css/bootstrap.min.css'%}" />
+		<link rel="stylesheet" type="text/css" href="{% static 'dolmen/css/bootstrap/css/bootstrap-responsive.min.css'%}" />
+		<link rel="stylesheet/less" type="text/css" href="{% static 'dolmen/css/main.less'%}" />
+		{% endblock %}
+	
+		{% endblock %}
+	</head>
+	<div class="wrapper home">
+		<header class="main">
+			<figure class="banner">
+				<div class="block-logo">	
+					<img  class="logo" src="{% static 'dolmen/img/logo.png'%}">
+					<figcaption>version de dev</figcaption>
+				</div>
+			</figure>	
+		</header>
+	<body>
+			{% comment %}		
+			<header class="main">
+			{% block header %} {% include "header.html" %} {% endblock %}
+			</header>
+	
+	
+			<div id="menu">
+					<nav class="main">
+					{% block nav %}{% include "menu.html" %} {% endblock %}		
+					</nav>
+			</div>
+	
+			
+			{% block postman_menu %}
+			{% endblock %}
+			{% endcomment %}
+			<div id="content">
+				{% block content %} {% endblock %} 
+			</div>
+			
+			{% comment %}
+			
+			<footer class="main">
+				{% block footer %}
+					{% include "footer.html" %}
+				{% endblock %}		
+			
+			</footer> 
+	
+			{% endcomment %}
+	
+		
+	</body>
+	</div>
+
+
+</html>

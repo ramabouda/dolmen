@@ -1,0 +1,74 @@
+{% load staticfiles %}
+
+<div class='big-tile ground-{{ tile.ground }}'
+    style="background-image: url({% static 'game/images/grounds/big/' %}{{ tile.ground }}.png)"
+    data-tile-id='{{ tile.id }}'>
+    
+    <a href="#" class="close-button">X</a>
+    
+    {% for village in tile.village_set.all %}
+        <img
+        class="village_display village_{{ forloop.counter }} has_popover default_popover"
+            id="village_{{ village.id }}"
+            data-village_id="{{ village.id }}"
+            data-menu_id='menu_village_{{ village.id }}'
+            src="{% static 'game/images/village.png' %}"
+            />
+        <menu id="menu_village_{{ village.id }}" class='popover-content'>
+            <ul class='action-list'>
+                <li
+                    class='popover_menu_item start_mission'
+                    data-village-id='{{ village.id }}'
+                    data-mission-type='annex'
+                    >
+                    Annexer le village
+                </li>
+                <li
+                    class='popover_menu_item start_mission'
+                    data-village-id='{{ village.id }}'
+                    data-mission-type='loot'
+                    >
+                    Piller le village
+                </li>
+                <li 
+                    class='popover_menu_item start_mission'
+                    data-village-id='{{ village.id }}'
+                    data-mission-type='carry'
+                    >
+                    Transporter des ressources
+                </li>
+                <li
+                    class='popover_menu_item start_mission'
+                    data-village-id='{{ village.id }}'
+                    data-mission-type='rape'
+                    >
+                    Violer les femmes et égorger les enfants
+                </li>
+            </ul>
+        </menu>
+    {% endfor %}
+    
+    <div class="tile_groups">
+        {% for group in tile.group_set.all %}
+        <img
+            class="cur_pointer group_icon has_popover default_popover"
+            id="group_{{ group.id }}"
+            data-group_id="{{ group.id }}"
+            data-menu_id="menu_group_{{ group.id }}"
+            src="{% static 'game/images/group.png' %}"
+        />
+        <menu id="menu_group_{{ group.id }}" class='popover-content'>
+            <ul class='action-list'>
+                <li
+                    class='popover_menu_item start_mission'
+                    data-group-id='{{ group.id }}'
+                    data-mission-type='attack'
+                    >
+                    Attaquer
+                </li>
+            </ul>
+        </menu>
+        {% endfor %}
+    </div>
+
+</div>

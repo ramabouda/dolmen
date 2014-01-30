@@ -1,0 +1,57 @@
+{% extends 'game/game.html' %}
+
+{% block game_content %}
+    
+
+<h2>Technologies</h2>
+
+{% for techno, infos in technos.items %}
+<div class="techno box itembox">
+    <header>
+        <h3>{{techno.name}}</h3>
+    </header>
+    <div class="content">
+        <img class="icon" src="{{ techno.image_url }}" alt="{{techno.name}}" />
+        <div class="info">
+            
+            <div class="level">Niveau {% if infos.techno_knowledge %}{{infos.techno_knowledge.level}}{% else %}0{% endif %}</div>
+            
+            <div class="requirements">
+                {% if infos.required|length > 0 %}
+                    Prérequis :<br />
+                    {% for need,lvl in infos.required.items %}
+                        <span class="{% if lvl.level_required > lvl.actual_level %}required{% else %}available{% endif %}">
+                        {{need.need.name}} au niveau {{lvl.level_required}}</span> (actuellement niveau {{lvl.actual_level}})
+                    {% endfor %}
+                {% else %}
+                    Pas de prérequis
+                {% endif %}
+            </div>        
+            
+            <div class="upgrade-form">
+                {% if techno in available_technos %}
+                <form method="post" action="">
+                    {{infos.form}}
+                    {% csrf_token %}
+                    <input type="submit" value="Rechercher niveau {% if infos.techno_knowledge %}{{infos.techno_knowledge.level|add:"1"}}{% else %}1{% endif %}">
+                </form>
+                {% endif %}
+                {% if techno.id in need_requirement_upgrade %}
+                    Augmentez les technologies requises
+                {% endif %}
+            </div>
+            
+            <div class="cost">
+                {% if infos.techno_knowledge %}
+                    {{ infos.techno_knowledge.cost_next_upgrade.html|safe }}
+                {% else %}
+                    {{ techno.cost.html|safe }}
+                {% endif %}
+            </div>
+            
+        </div>
+    </div>
+</div>
+{% endfor %}
+
+{% endblock %}

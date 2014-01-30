@@ -1,0 +1,22 @@
+{% load humanize %}
+<article id='report-{{ report.id }}' class="message box">
+    <header>
+        <nav>
+            <ul class="unstyled">
+                <li class='delete-report' data-report-id='{{ report.id }}'><a href="#">Supprimer</a></li>
+                {% if report.read %}
+                <li class='mark-read-report' data-report-id='{{ report.id }}'><a href="#">Marquer comme lu</a></li>
+                {% else %}
+                <li class='mark-unread-report' data-report-id='{{ report.id }}'><a href="#">Marquer comme non lu</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+        <h3>
+            {{ report.subject|safe }}
+        </h3>
+        <span>{{ report.date|naturaltime }}</span>
+    </header>
+    <div class="content">
+        {{ report.body|safe }}
+    </div>
+</article>
